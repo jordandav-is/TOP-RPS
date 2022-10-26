@@ -181,98 +181,35 @@
 			case "rock":
 				if(computerSelection == "rock") {
 					playerTie();
+					return;
 				} else if(computerSelection == "paper") {
 					playerLose();
-					if (playerWinCounter === 5) {
-						displayMessage("You totally and completely beat the computer, what a WINNER!");
-						return;
-					} else if (computerWinCounter === 5) {
-						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
-						return;
-					} else {
-						return;
-					}
+					return;
 				} else {
 					playerWin();
-					if (playerWinCounter === 5) {
-						displayMessage("You totally and completely beat the computer, what a WINNER!");
-						return;
-					} else if (computerWinCounter === 5) {
-						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
-						return;
-					} else {
-						return;
-					}
+					return;
 				}
 			case "paper":
 				if(computerSelection == "rock") {
 					playerWin();
-					if (playerWinCounter === 5) {
-						displayMessage("You totally and completely beat the computer, what a WINNER!");
-						return;
-					} else if (computerWinCounter === 5) {
-						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
-						return;
-					} else {
-						return;
-					}
+					return;
 				} else if(computerSelection == "paper") {
 					playerTie();
-					if (playerWinCounter === 5) {
-						displayMessage("You totally and completely beat the computer, what a WINNER!");
-						return;
-					} else if (computerWinCounter === 5) {
-						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
-						return;
-					} else {
-						return;
-					}
+					return;
 				} else {
 					playerLose();
-					if (playerWinCounter === 5) {
-						displayMessage("You totally and completely beat the computer, what a WINNER!");
-						return;
-					} else if (computerWinCounter === 5) {
-						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
-						return;
-					} else {
-						return;
-					}
+					return;
 				}
 			case "scissors":
 				if(computerSelection == "rock") {
 					playerLose();
-					if (playerWinCounter === 5) {
-						displayMessage("You totally and completely beat the computer, what a WINNER!");
-						return;
-					} else if (computerWinCounter === 5) {
-						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
-						return;
-					} else {
-						return;
-					}
+					return;
 				} else if(computerSelection == "paper") {
 					playerWin();
-					if (playerWinCounter === 5) {
-						displayMessage("You totally and completely beat the computer, what a WINNER!");
-						return;
-					} else if (computerWinCounter === 5) {
-						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
-						return;
-					} else {
-						return;
-					}
+					return;
 				} else {
 					playerTie();
-					if (playerWinCounter === 5) {
-						displayMessage("You totally and completely beat the computer, what a WINNER!");
-						return;
-					} else if (computerWinCounter === 5) {
-						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
-						return;
-					} else {
-						return;
-					}
+					return;
 				}
 			}
 		}
