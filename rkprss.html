@@ -1,60 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Rock Paper Scissors</title>
+
+	<!-- in lieu of CSS file, apply the following style -->
+	<style>
+		p {
+			display: block;
+			margin-block-start: 1em;
+			margin-block-end: 1em;
+			margin-inline-start: 0px;
+			margin-inline-end: 0px;
+		}
+
+		#consoleDiv {
+			background: black;
+			width: 100%;
+		}
+
+		p.consoleOld {
+			font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+    		font-size: 12px;
+    		color: white;
+    		margin-bottom: 0px;
+			margin-top: 0px;
+		}
+
+		p.consoleNow {
+			font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+			font-size: 12px;
+			color: white;
+			margin-top: 0px;
+			margin-bottom: 12px;
+		}
+	</style>
+</head>
+<body>
+	<div id="consoleDiv">
+		<p class="consoleOld">
+			<span>&nbsp;.&nbsp;</span>
+			<span id = "readout5"></span>
+			<br>
+			<span>&nbsp;.&nbsp;</span>
+			<span id = "readout4"></span>
+			<br>
+			<span>&nbsp;.&nbsp;</span>
+			<span id = "readout3"></span>
+			<br>
+			<span>&nbsp;.&nbsp;</span>
+			<span id = "readout2"></span>
+			<br>
+		</p>
+		<p class="consoleNow">
+			<span>&nbsp;>&nbsp;</span>
+			<span id = "readout1">Beat the randomness of the universe in Rock Paper Scissors! First to 5 wins.</span>
+		</p>
+	</div>
+	<div class="controlsDiv">
+		<button id="rock">Rock</button>
+		<button id="paper">Paper</button>
+		<button id="scissors">Scissors</button>
+	</div>
+
+</body>
+
 <script>
-function getComputerChoice() {
-    let choiceInt = Math.floor(Math.random() * 3)+1;
-    switch(choiceInt) {
-        case 1:
-            return "rock";
-        case 2:
-            return "paper";
-        case 3:
-            return "scissors";
+	const buttonRock = document.getElementById("rock");
+	const buttonPaper = document.getElementById("paper");
+	const buttonScissors = document.getElementById("scissors");
 
-    }
-}
+	const readoutElement5 = document.getElementById("readout5");
+	const readoutElement4 = document.getElementById("readout4");
+	const readoutElement3 = document.getElementById("readout3");
+	const readoutElement2 = document.getElementById("readout2");
+	const readoutElement1 = document.getElementById("readout1");
 
-function playRound(playerSelection, computerSelection) {
-	const playerWin = "You WIN!";
-	const playerLose = "You lose. Sad.";
-	const playerTie = "You tied!";
+	let playerWinCounter = 0
+	let computerWinCounter = 0
+
+	buttonRock.addEventListener("click", function () {
+		playerSelection = "rock";
+		computerSelection = getComputerChoice();
+		displayMessage("Computer chose "+computerSelection);
+		playRound(playerSelection, computerSelection);
+	});
+
+	buttonPaper.addEventListener("click", function () {
+		playerSelection = "paper";
+		computerSelection = getComputerChoice();
+		displayMessage("Computer chose "+computerSelection);
+		playRound(playerSelection, computerSelection);
+	});
+
+	buttonScissors.addEventListener("click", function () {
+		playerSelection = "scissors";
+		computerSelection = getComputerChoice();
+		displayMessage("Computer chose "+computerSelection);
+		playRound(playerSelection, computerSelection);
+	});
+
+
+	function displayMessage(msg){
+    readoutElement5.innerHTML=readoutElement4.innerHTML;
+    readoutElement4.innerHTML=readoutElement3.innerHTML;
+    readoutElement3.innerHTML=readoutElement2.innerHTML;
+    readoutElement2.innerHTML=readoutElement1.innerHTML;
+    readoutElement1.innerHTML=msg;
+	};
+
+	function getComputerChoice() {
+		let choiceInt = Math.floor(Math.random() * 3)+1;
+		switch(choiceInt) {
+			case 1:
+				return "rock";
+			case 2:
+				return "paper";
+			case 3:
+				return "scissors";
 	
-	playerSelection = playerSelection.toLowerCase()
+		}
+	};
+	
+	function playerWin() {
+		displayMessage("You WIN!");
+		playerWinCounter + 1;
+		displayMessage("You've won "+playerWinCounter+" games");
+		displayMessage("The computer has won "+computerWinCounter+" games");
+		return;
+	};
 
-	switch(playerSelection) {
-		case "rock":
-			if(computerSelection == "rock") {
-				return playerTie;
-			} else if(computerSelection == "paper") {
-				return playerLose;
-			} else {
-				return playerWin;
-			}
-		case "paper":
-			if(computerSelection == "rock") {
-				return playerWin;
-			} else if(computerSelection == "paper") {
-				return playerTie;
-			} else {
-				return playerLose;
-			}
-		case "scissors":
-			if(computerSelection == "rock") {
-				return playerLose;
-			} else if(computerSelection == "paper") {
-				return playerWin;
-			} else {
-				return playerTie;
+	function playerLose() {
+		displayMessage("You lose. Sad.");
+		computerWinCounter + 1;
+		displayMessage("You've won "+playerWinCounter+" games");
+		displayMessage("The computer has won "+computerWinCounter+" games");
+		return;
+	};
+
+	function playerTie() {
+		displayMessage("You tied!");
+		displayMessage("You've won "+playerWinCounter+" games");
+		displayMessage("The computer has won "+computerWinCounter+" games");
+		return;
+	};
+
+	function playRound(playerSelection, computerSelection) {
+		function playerWin() {
+			displayMessage("You WIN!");
+			playerWinCounter += 1;
+			displayMessage("You've won "+playerWinCounter+" games");
+			displayMessage("The computer has won "+computerWinCounter+" games");
+			return;
+		};
+
+		function playerLose() {
+			displayMessage("You lose. Sad.");
+			computerWinCounter += 1;
+			displayMessage("You've won "+playerWinCounter+" games");
+			displayMessage("The computer has won "+computerWinCounter+" games");
+			return;
+		};
+
+		function playerTie() {
+			displayMessage("You tied!");
+			displayMessage("You've won "+playerWinCounter+" games");
+			displayMessage("The computer has won "+computerWinCounter+" games");
+			return;
+		};
+		
+		playerSelection = playerSelection.toLowerCase()
+	
+		switch(playerSelection) {
+			case "rock":
+				if(computerSelection == "rock") {
+					playerTie();
+					if (playerWinCounter === 5) {
+						displayMessage("You totally and completely beat the computer, what a WINNER!");
+						return;
+					} else if (computerWinCounter === 5) {
+						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
+						return;
+					} else {
+						return;
+					}
+				} else if(computerSelection == "paper") {
+					playerLose();
+					if (playerWinCounter === 5) {
+						displayMessage("You totally and completely beat the computer, what a WINNER!");
+						return;
+					} else if (computerWinCounter === 5) {
+						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
+						return;
+					} else {
+						return;
+					}
+				} else {
+					playerWin();
+					if (playerWinCounter === 5) {
+						displayMessage("You totally and completely beat the computer, what a WINNER!");
+						return;
+					} else if (computerWinCounter === 5) {
+						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
+						return;
+					} else {
+						return;
+					}
+				}
+			case "paper":
+				if(computerSelection == "rock") {
+					playerWin();
+					if (playerWinCounter === 5) {
+						displayMessage("You totally and completely beat the computer, what a WINNER!");
+						return;
+					} else if (computerWinCounter === 5) {
+						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
+						return;
+					} else {
+						return;
+					}
+				} else if(computerSelection == "paper") {
+					playerTie();
+					if (playerWinCounter === 5) {
+						displayMessage("You totally and completely beat the computer, what a WINNER!");
+						return;
+					} else if (computerWinCounter === 5) {
+						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
+						return;
+					} else {
+						return;
+					}
+				} else {
+					playerLose();
+					if (playerWinCounter === 5) {
+						displayMessage("You totally and completely beat the computer, what a WINNER!");
+						return;
+					} else if (computerWinCounter === 5) {
+						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
+						return;
+					} else {
+						return;
+					}
+				}
+			case "scissors":
+				if(computerSelection == "rock") {
+					playerLose();
+					if (playerWinCounter === 5) {
+						displayMessage("You totally and completely beat the computer, what a WINNER!");
+						return;
+					} else if (computerWinCounter === 5) {
+						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
+						return;
+					} else {
+						return;
+					}
+				} else if(computerSelection == "paper") {
+					playerWin();
+					if (playerWinCounter === 5) {
+						displayMessage("You totally and completely beat the computer, what a WINNER!");
+						return;
+					} else if (computerWinCounter === 5) {
+						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
+						return;
+					} else {
+						return;
+					}
+				} else {
+					playerTie();
+					if (playerWinCounter === 5) {
+						displayMessage("You totally and completely beat the computer, what a WINNER!");
+						return;
+					} else if (computerWinCounter === 5) {
+						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
+						return;
+					} else {
+						return;
+					}
+				}
 			}
 		}
-	}
-
-function game() {
-	for (let i = 0; i < 5; i++) {
-		playerSelection = prompt("Rock, Paper, or Scissors?");
-		computerSelection = getComputerChoice();
-		console.log(playRound(playerSelection, computerSelection));
-	}
-}
-
-game()
+	
+	
+	//function game() {
+	//	for (let i = 0; i < 5; i++) {
+	//		playerSelection = prompt("Rock, Paper, or Scissors?");
+	//		computerSelection = getComputerChoice();
+	//		console.log(playRound(playerSelection, computerSelection));
+	//	}
+	//}
+	//
+	//game()
 
 </script>
+</html>
