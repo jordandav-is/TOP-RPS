@@ -123,29 +123,6 @@
 	
 		}
 	};
-	
-	function playerWin() {
-		displayMessage("You WIN!");
-		playerWinCounter + 1;
-		displayMessage("You've won "+playerWinCounter+" games");
-		displayMessage("The computer has won "+computerWinCounter+" games");
-		return;
-	};
-
-	function playerLose() {
-		displayMessage("You lose. Sad.");
-		computerWinCounter + 1;
-		displayMessage("You've won "+playerWinCounter+" games");
-		displayMessage("The computer has won "+computerWinCounter+" games");
-		return;
-	};
-
-	function playerTie() {
-		displayMessage("You tied!");
-		displayMessage("You've won "+playerWinCounter+" games");
-		displayMessage("The computer has won "+computerWinCounter+" games");
-		return;
-	};
 
 	function playRound(playerSelection, computerSelection) {
 		function playerWin() {
@@ -153,7 +130,21 @@
 			playerWinCounter += 1;
 			displayMessage("You've won "+playerWinCounter+" games");
 			displayMessage("The computer has won "+computerWinCounter+" games");
-			return;
+			if (playerWinCounter === 5) {
+						displayMessage("You totally and completely beat the computer, what a WINNER!");
+						buttonRock.disabled = true;
+						buttonPaper.disabled = true;
+						buttonScissors.disabled = true;
+						return;
+					} else if (computerWinCounter === 5) {
+						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
+						buttonRock.disabled = true;
+						buttonPaper.disabled = true;
+						buttonScissors.disabled = true;
+						return;
+					} else {
+						return;
+					}
 		};
 
 		function playerLose() {
@@ -161,14 +152,27 @@
 			computerWinCounter += 1;
 			displayMessage("You've won "+playerWinCounter+" games");
 			displayMessage("The computer has won "+computerWinCounter+" games");
-			return;
+			if (playerWinCounter === 5) {
+				displayMessage("You totally and completely beat the computer, what a WINNER!");
+				buttonRock.disabled = true;
+				buttonPaper.disabled = true;
+				buttonScissors.disabled = true;
+				return;
+			} else if (computerWinCounter === 5) {
+				displayMessage("Wait, you lost? I never even met you, what a LOSER.");
+				buttonRock.disabled = true;
+				buttonPaper.disabled = true;
+				buttonScissors.disabled = true;
+				return;
+			} else {
+				return;
+			}
 		};
 
 		function playerTie() {
 			displayMessage("You tied!");
 			displayMessage("You've won "+playerWinCounter+" games");
 			displayMessage("The computer has won "+computerWinCounter+" games");
-			return;
 		};
 		
 		playerSelection = playerSelection.toLowerCase()
@@ -177,15 +181,6 @@
 			case "rock":
 				if(computerSelection == "rock") {
 					playerTie();
-					if (playerWinCounter === 5) {
-						displayMessage("You totally and completely beat the computer, what a WINNER!");
-						return;
-					} else if (computerWinCounter === 5) {
-						displayMessage("Wait, you lost? I never even met you, what a LOSER.");
-						return;
-					} else {
-						return;
-					}
 				} else if(computerSelection == "paper") {
 					playerLose();
 					if (playerWinCounter === 5) {
